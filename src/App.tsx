@@ -173,6 +173,25 @@ const ButtonGroup = styled.div`
   width: 100%;
 `;
 
+const AppContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const MainContent = styled.main`
+  flex: 1;
+`;
+
+const GreetingColumn = styled.div`
+  @media (min-width: 900px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+`;
+
 const App: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -197,48 +216,48 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
+    <AppContainer>
       <GlobalStyles />
       <BackgroundVideo />
       <FadeOverlay />
       <ParticleCanvas />
-      <Title>
-        පින්බර වෙසක් මංගල්‍යයක් වේවා !
-      </Title>
-      <section id="greeting-section">
-        <GreetingContainer>
-          <Greeting>
-            උතුම් සදහම් සුවඳ මෙත් කරුණා.<br /> පියුමන් සිත් තුළ පිපේවා..<br />
-            බුදුරදුන් පාමුල දිලෙන්නා වූ රන්වන් පහන් සිළු සේ. සියලු සිත් සතන් දිලේවා..<br /><br />
-            තිලෝගුරු අප සම්මා සම්බුදුරජාණන් වහන්සේගේ උතුම් වූ තෙමඟුල සමරන 
-            මේ වෛශාඛ්‍ය මංග්‍යලයේ සදහම් සිසිල දසත පැතිරේවා !<br /><br />
-            ඔබ සැමට සුපහන් බැතිබර සිත් උපදින සුපින්බර වෙසක් පුර පසළොස්වක පොහෝ දිනයක් වේවා !!🤍
-          </Greeting>
-        </GreetingContainer>
-        <Button onClick={handlePlayClick}>
-          {isPlaying ? "Click to Stop" : "Click to Listen"}
-        </Button>
-        <DownloadCard onClick={() => setIsModalOpen(true)}>
-          View Vesak Card
-        </DownloadCard>
-      </section>
-
-      <audio ref={musicRef} loop>
-        <source src="/music.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
-      </audio>
-
-      <audio ref={narrationRef} preload="auto">
-        <source src="/narration.mp3" type="audio/mp3" />
-        Your browser does not support the audio element.
-      </audio>
-
-      <CardModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-
+      <MainContent>
+        <Title>
+          පින්බර වෙසක් මංගල්‍යයක් වේවා !
+        </Title>
+        <section id="greeting-section">
+          <GreetingContainer>
+            <GreetingColumn>
+              <Greeting>
+                උතුම් සදහම් සුවඳ මෙත් කරුණා.<br /> පියුමන් සිත් තුළ පිපේවා..<br />
+                බුදුරදුන් පාමුල දිලෙන්නා වූ රන්වන් පහන් සිළු සේ. සියලු සිත් සතන් දිලේවා..<br /><br />
+                තිලෝගුරු අප සම්මා සම්බුදුරජාණන් වහන්සේගේ උතුම් වූ තෙමඟුල සමරන 
+                මේ වෛශාඛ්‍ය මංග්‍යලයේ සදහම් සිසිල දසත පැතිරේවා !<br /><br />
+                ඔබ සැමට සුපහන් බැතිබර සිත් උපදින සුපින්බර වෙසක් පුර පසළොස්වක පොහෝ දිනයක් වේවා !!🤍
+              </Greeting>
+              <Button onClick={handlePlayClick}>
+                {isPlaying ? "Click to Stop" : "Click to Listen"}
+              </Button>
+            </GreetingColumn>
+            <DownloadCard onClick={() => setIsModalOpen(true)}>
+              View Vesak Card
+            </DownloadCard>
+          </GreetingContainer>
+        </section>
+        <audio ref={musicRef} loop>
+          <source src="/music.mp3" type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+        <audio ref={narrationRef} preload="auto">
+          <source src="/narration.mp3" type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+        <CardModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      </MainContent>
       <Footer>
         <Logo src="/association-logo.png" alt="Association Logo" />
       </Footer>
-    </>
+    </AppContainer>
   );
 };
 
